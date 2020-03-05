@@ -35,7 +35,7 @@ Generates primes orders of magnitude faster than any pure Lisp code!
 ;; with the primes it is also possible to simply iterate over the primes
 ;; which uses less memory.
 (defvar iter (make-iterator))
-(init iter)      ; init it before using it
+(init iter)        ; init it before using it
 (next-prime iter)
 (skipto iter 100)  ; reset the iterator to start from 100
 (next-prime iter)
@@ -46,7 +46,7 @@ Generates primes orders of magnitude faster than any pure Lisp code!
 (get-num-threads)
 (set-num-threads 2)
 ```
-Package cl-primesieve has nickname "cl-ps".
+Package cl-primesieve has nickname cl-ps.
 
 ## Installation
 
@@ -57,6 +57,7 @@ cd ~/quicklisp/local-projects/
 git clone https://github.com/AaronChen0/cl-primesieve
 ```
 
+In a lisp repl:
 ``` common-lisp
 (ql:quickload "cl-primesieve")
 ```

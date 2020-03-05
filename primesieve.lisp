@@ -122,10 +122,14 @@
 (defcfun ("primesieve_free_iterator" free-iterator) :void
   (it :pointer))
 
-(defcfun ("primesieve_skipto" skipto) :void
-  (it :pointer)
-  (start :uint64)
-  (stop-hint :uint64))
+;; Reset the primesieve iterator to start.
+;; @param start      Generate primes > start (or < start).
+;; @param stop_hint  Stop number optimization hint. E.g. if you want
+;;                   to generate the primes below 1000 use
+;;                   stop_hint = 1000, default (get-max-stop).
+(defun skipto (it start &optional (stop-hint (get-max-stop)))
+  (foreign-funcall "primesieve_skipto" :pointer it
+                   :uint64 start :uint64 stop-hint :void))
 
 (defcfun ("primesieve_generate_next_primes" generate-next-primes) :void
   (it :pointer))

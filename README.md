@@ -28,24 +28,25 @@ Generates primes orders of magnitude faster than any pure Lisp code!
 (generate-primes 1 (expt 10 9)) ; run under 1 sec
 
 ;; Get an array with the first n primes >= start(optional).
-(generate-n-primes (1000))
-(generate-n-primes (1000 100)) ; get 1000 primes starting from 100
+(generate-n-primes 1000)
+(generate-n-primes 1000 100) ; get 1000 primes starting from 100
 
 ;; Instead of generating a large array of primes and then do something
 ;; with the primes it is also possible to simply iterate over the primes
 ;; which uses less memory.
 (defvar iter (make-iterator))
-(init iter)      ; init it before using it
-(next-prime)
-(skipto it 100)  ; reset the iterator to start from 100
-(next-prime)
-(prev-prime)
+(init iter)        ; init it before using it
+(next-prime iter)
+(skipto iter 100)  ; reset the iterator to start from 100
+(next-prime iter)
+(prev-prime iter)
 
-;; Set/Get number of threads used
+;; Set/Get number of threads used.
 ;; By default all CPU cores are used.
 (get-num-threads)
 (set-num-threads 2)
 ```
+Package cl-primesieve has nickname cl-ps.
 
 ## Installation
 
@@ -56,6 +57,7 @@ cd ~/quicklisp/local-projects/
 git clone https://github.com/AaronChen0/cl-primesieve
 ```
 
+In a lisp repl:
 ``` common-lisp
 (ql:quickload "cl-primesieve")
 ```

@@ -31,6 +31,9 @@ Generates primes orders of magnitude faster than any pure Lisp code!
 (generate-n-primes 1000)
 (generate-n-primes 1000 100) ; get 1000 primes starting from 100
 
+;; Get the 1000th prime
+(nth-prime 1000)
+
 ;; Instead of generating a large array of primes and then do something
 ;; with the primes it is also possible to simply iterate over the primes
 ;; which uses less memory.

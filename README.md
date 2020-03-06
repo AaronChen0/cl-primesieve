@@ -40,13 +40,14 @@ Generates primes orders of magnitude faster than any pure Lisp code!
 (skipto iter 100)  ; reset the iterator to start from 100
 (next-prime iter)
 (prev-prime iter)
+(free-iterator iter)
 
 ;; Set/Get number of threads used.
 ;; By default all CPU cores are used.
 (get-num-threads)
 (set-num-threads 2)
 ```
-Package cl-primesieve has nickname cl-ps.
+For convenience, package cl-primesieve has nickname cl-ps.
 
 ## Installation
 

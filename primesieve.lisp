@@ -15,10 +15,12 @@
 (load-lib)
 
 (defcenum int-type
-  :short-primes :ushort-primes :int-primes :uint-primes
+  :short-primes :ushort-primes
+  :int-primes :uint-primes
   :long-primes :ulong-primes
   :longlong-primes :ulonglong-primes
-  :int16-primes :uint16-primes :int32-primes :uint32-primes
+  :int16-primes :uint16-primes
+  :int32-primes :uint32-primes
   :int64-primes :uint64-primes)
 
 ;; Get an array with the primes inside the interval [start, stop].
@@ -73,8 +75,6 @@
 (defcount count-quintuplets)
 (defcount count-sextuplets)
 
-;; When used in slime, fflush has to be applied,
-;; in order to see number print out.
 (defcvar ("stdout" stdout) :pointer)
 
 (defmacro defprint (name)
@@ -138,19 +138,16 @@
   (it :pointer))
 
 (defun next-prime (it)
-  (with-foreign-slots ((i last-idx start stop stop-hint dist primes)
-                       it (:struct iterator))
-    (declare (ignore start stop stop-hint dist))
+  (with-foreign-slots ((i last-idx primes) it (:struct iterator))
     (when (= (prog1 i (incf i)) last-idx)
       (generate-next-primes it))
     (mem-aref primes :uint64 i)))
 
 (defun prev-prime (it)
-  (with-foreign-slots ((i last-idx start stop stop-hint dist primes)
-                       it (:struct iterator))
-    (declare (ignore last-idx start stop stop-hint dist))
-    (when (zerop (prog1 i (decf i)))
-      (generate-prev-primes it))
+  (with-foreign-slots ((i primes) it (:struct iterator))
+    (if (zerop i)
+        (generate-prev-primes it)
+        (decf i))
     (mem-aref primes :uint64 i)))
 
 ;; Returns the largest valid stop number for primesieve.

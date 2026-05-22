@@ -53,7 +53,7 @@
 ;;           if n > 0 finds the nth prime > start,
 ;;           if n < 0 finds the nth prime < start (backwards).
 (defcfun ("primesieve_nth_prime" nth-prime) :uint64
-  (n :uint64)
+  (n :int64)
   (start :uint64))
 
 (defmacro defcount (name)
